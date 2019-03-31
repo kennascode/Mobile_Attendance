@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2019 at 01:30 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: Mar 31, 2019 at 07:05 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -43,7 +45,8 @@ CREATE TABLE `class` (
 INSERT INTO `class` (`Class_ID`, `Section`, `Subject_Code`, `Semester`, `Academic_Year`, `Schedule_Day`, `Schedule_Time`) VALUES
 (6, 'BSIT 3Ab', 'Filipino', 'First Semester', '2222', 'MWF', '2:00am-2:00pm'),
 (7, 'bse-tle', 'Filipino 11', 'Second Semester', '2009', 'lunes', '3:00'),
-(8, 'marawi', 'Filipino', 'First Semester', '2019', 'monday', '2:00am-2:00pm');
+(8, 'marawi', 'Filipino', 'First Semester', '2019', 'monday', '2:00am-2:00pm'),
+(9, 'hugno', 'Filipino 11', 'Summer', '2018-2019', 'm-f', '8-5');
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,8 @@ INSERT INTO `student_class` (`number`, `Student_ID`, `Class_ID`) VALUES
 (14, '0909', 6),
 (17, '0909', 8),
 (18, '877888887', 6),
-(19, '6676778', 6);
+(19, '6676778', 6),
+(20, '11111111', 9);
 
 -- --------------------------------------------------------
 
@@ -133,12 +137,8 @@ CREATE TABLE `take_attendance` (
 --
 
 INSERT INTO `take_attendance` (`Student_ID`, `Class_ID`, `Time_Stamp`, `Remarks`) VALUES
-('0909', 6, 'adf', 'Absent'),
-('606888', 6, 'adf', 'Absent'),
-('6676778', 6, 'adf', 'Present'),
-('877888887', 6, 'adf', 'Absent'),
-('11111111', 7, '', 'Present'),
-('0909', 8, '', 'Excuse');
+('877888887', 6, '8am', 'Present'),
+('877888887', 6, '546', 'Present');
 
 --
 -- Indexes for dumped tables
@@ -186,12 +186,14 @@ ALTER TABLE `take_attendance`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `Class_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Class_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `student_class`
 --
 ALTER TABLE `student_class`
-  MODIFY `number` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `number` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- Constraints for dumped tables
 --
@@ -215,6 +217,7 @@ ALTER TABLE `student_class`
 ALTER TABLE `take_attendance`
   ADD CONSTRAINT `take_attendance_ibfk_1` FOREIGN KEY (`Student_ID`) REFERENCES `student` (`Student_ID`),
   ADD CONSTRAINT `take_attendance_ibfk_2` FOREIGN KEY (`Class_ID`) REFERENCES `class` (`Class_ID`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
